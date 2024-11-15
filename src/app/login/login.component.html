@@ -1,0 +1,34 @@
+<div class="navbar" [ngClass]="{'shrink':isShrunk}">
+  <div class="app-name" style="cursor: pointer;"  >Shopping Manager</div>
+  
+</div>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <mat-card>
+      <mat-card-title>Iniciar Sesión</mat-card-title>
+      <mat-card-content>
+        <div>
+          <mat-form-field class="full-width">
+            <mat-label>Correo</mat-label>
+            <input matInput formControlName="email" />
+            <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Correo requerido</mat-error>
+            <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Correo inválido</mat-error>
+          </mat-form-field>
+        </div>
+  
+        <div>
+          <mat-form-field appearance="fill">
+            <mat-label>Contraseña</mat-label>
+            <input matInput id="password" formControlName="password" type="password" />
+            <mat-error *ngIf=" hasErrors('password','required')">
+              Contraseña es requerida.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card-content> 
+         <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit" onclick="onSubmit()" >Login</button>
+      </mat-card-actions>
+      <div *ngIf="loginError" class="error-message">{{ errorMessage }}</div>
+    </mat-card>
+</form>

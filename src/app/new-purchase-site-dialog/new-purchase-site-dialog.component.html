@@ -1,0 +1,16 @@
+<!-- new-purchase-site-dialog.component.html -->
+<h2 mat-dialog-title>Agregar Nuevo Sitio de Compra</h2>
+<mat-dialog-content>
+  <form [formGroup]="newSiteForm">
+    <!-- Nombre del Sitio -->
+    <mat-form-field class="full-width">
+      <mat-label>Nombre del Sitio</mat-label>
+      <input matInput formControlName="siteName" placeholder="Ej. Supermercado">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-stroked-button color="warn" (click)="onCancel()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSave()" [disabled]="newSiteForm.invalid">Guardar</button>
+</mat-dialog-actions>

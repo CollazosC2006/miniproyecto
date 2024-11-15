@@ -1,0 +1,8 @@
+<div class="navbar" [ngClass]="{'shrink': isShrunk}">
+    <div class="app-name" style="cursor: pointer;"  [routerLink]="['/']">Shopping Manager</div>
+    <div class="navbar-buttons">
+      <button mat-button class="custom-button"  [routerLink]="['/home-page']">Home</button>
+      <button mat-button class="custom-button" type="submit"  [routerLink]="['/admin-users']">Administrar Usuarios</button>
+      <button mat-button class="custom-button" (click)="logout()" >Log out</button>
+    </div>
+</div>

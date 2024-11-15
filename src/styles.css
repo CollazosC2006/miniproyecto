@@ -1,0 +1,17 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: "Be Vietnam Pro", sans-serif;
+}
+:root {
+    --primary-color: #b71c1c;  /* Rojo intenso */
+    --secondary-color: #d32f2f; /* Rojo mediano */
+    --third-color: #f44336;  /* Rojo claro */
+    --accent-color: #ffebee;  /* Fondo suave */
+    --button-hover: #e53935;  /* Hover del botón */
+    --text-color: #ffffff;  /* Blanco para texto */
+    --shadow-color: rgba(0, 0, 0, 0.2);  /* Sombra sutil */
+}
+
+  
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

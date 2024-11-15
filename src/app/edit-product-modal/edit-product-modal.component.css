@@ -1,0 +1,52 @@
+h2[mat-dialog-title] {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .full-width {
+    width: 80%;
+  }
+  
+  .quantity-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .quantity-container mat-form-field {
+    flex: 1;
+  }
+  
+  .purchase-site {
+    margin-bottom: 1rem;
+  }
+  
+  mat-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+  
+  mat-dialog-actions button {
+    min-width: 100px;
+    padding: 0.6rem 1rem;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+  }
+  
+  button[mat-stroked-button] {
+    border-color: #d32f2f;
+    color: #d32f2f;
+  }
+  
+  button[mat-raised-button] {
+    background-color: #1976d2;
+    color: #fff;
+  }
+  

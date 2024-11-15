@@ -1,0 +1,160 @@
+<app-nvbar></app-nvbar>
+
+<mat-card>
+  
+  
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+      <mat-card-title>Gestión de Usuarios</mat-card-title>
+      <mat-form-field appearance="outline">
+        <mat-label>Buscar por nombre</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ingrese nombre"/>
+      </mat-form-field>
+    </div>
+  
+    <mat-card-content class="scrollable-table">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+         <!-- Cédula Column -->
+         <ng-container matColumnDef="cedula">
+          <th mat-header-cell *matHeaderCellDef sticky> Cédula </th>
+          <td mat-cell *matCellDef="let element" [ngClass]="{'selected': selectedUsuario === element}" (click)="selectUsuario(element)">
+            {{element.cedula}}
+          </td>
+        </ng-container>
+        
+  
+        <!-- Nombre Column -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef sticky> Nombre </th>
+          <td mat-cell *matCellDef="let element" [ngClass]="{'selected': selectedUsuario === element}" (click)="selectUsuario(element)">
+            {{element.name}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="last_name">
+          <th mat-header-cell *matHeaderCellDef sticky> Apellido </th>
+          <td mat-cell *matCellDef="let element" [ngClass]="{'selected': selectedUsuario === element}" (click)="selectUsuario(element)">
+            {{element.last_name}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="correo">
+          <th mat-header-cell *matHeaderCellDef sticky> Correo </th>
+          <td mat-cell *matCellDef="let element" [ngClass]="{'selected': selectedUsuario === element}" (click)="selectUsuario(element)">
+            {{element.mail}}
+          </td>
+        </ng-container>
+        <!-- ID Column -->
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef sticky> Rol </th>
+          <td mat-cell *matCellDef="let element" [ngClass]="{'selected': selectedUsuario === element}" (click)="selectUsuario(element)">
+            {{element.role}}
+          </td>
+        </ng-container>
+       
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  
+  
+    <!-- ... Resto del contenido ... -->
+  
+  
+  <mat-card-subtitle>{{action_form}}</mat-card-subtitle>
+  <mat-card-content>
+    <form [formGroup]="usuarioForm">
+      
+      
+      <!-- Nombre Field -->
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="name" maxlength="50" inputmode="text" />
+      </mat-form-field>
+      
+      <!-- Apellido Field -->
+      <mat-form-field>
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="last_name" maxlength="50" inputmode="text" />
+      </mat-form-field>
+      
+      <!-- Cédula Field -->
+      <mat-form-field>
+        <mat-label>Cédula</mat-label>
+        <input matInput formControlName="cedula" type="number" />
+      </mat-form-field>
+      <!-- Tipo de Documento Field -->
+      <mat-form-field>
+        <mat-label>Tipo de Documento</mat-label>
+        <mat-select formControlName="type_doc">
+          <mat-option value="CC">Cédula de Ciudadanía</mat-option>
+          <mat-option value="TI">Tarjeta de Identidad</mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <!-- Cumpleaños Field -->
+      <mat-form-field>
+        <mat-label>Cumpleaños</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="birthday" [max]="maxDate" readonly/>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      
+      <!-- Género Field -->
+      <mat-form-field>
+        <mat-label>Género</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option value="M">Masculino</mat-option>
+          <mat-option value="F">Femenino</mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <!-- Correo Field -->
+      <mat-form-field>
+        <mat-label>Correo</mat-label>
+        <input matInput formControlName="mail" maxlength="40" />
+      </mat-form-field>
+      
+      <!-- Teléfono Field -->
+      <mat-form-field>
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="phone" type="tel" maxlength="10" inputmode="numeric" />
+      </mat-form-field>
+
+      
+      
+      <!-- Foto Field -->
+      
+      
+      <!-- Rol Field -->
+      <mat-form-field>
+        <mat-label>Rol</mat-label>
+        <mat-select formControlName="role">
+          <mat-option [disabled]="disable_admin" value="admin">Admin</mat-option>
+          <mat-option [disabled]="disable_user" value="user">Usuario</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password"  maxlength="12"  />
+      </mat-form-field>
+      
+      
+    </form>
+  </mat-card-content>
+  <!-- Mensaje de error -->
+  <div style="color: red; font-size: 12px; margin-top: 1px; margin-left: 3%;">
+    Campos Obligatorios: *
+  </div>
+  <div *ngIf="errorMessage" style="color: red; font-size: 12px; margin-top: 1px; margin-left: 3%;">
+    {{ errorMessage }}
+  </div>
+  
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="actualizarUsuario()" [disabled]="!usuarioForm.valid || !selectedUsuario">Actualizar</button>
+    <button mat-raised-button color="warn" (click)="eliminarUsuario()" [disabled]="!selectedUsuario">Eliminar</button>
+    <button mat-raised-button color="accent" (click)="crearUsuario()" [disabled]=" selectedUsuario">Crear</button>
+    <button mat-raised-button (click)="limpiarFormulario()">Limpiar</button>
+  </mat-card-actions>
+</mat-card>
